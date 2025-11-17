@@ -1,44 +1,48 @@
 export class File {
 
+    private opened: boolean = false;
+
     public isOpen(): boolean {
-      throw new Error("incomplete example code");
+      return this.opened;
     }
   
     public isClosed(): boolean {
-        throw new Error("incomplete example code");
+        return !this.opened;
     }
   
     public open(): void {
       this.assertIsClosedFile();
-      throw new Error("incomplete example code");
+      this.opened = true;
     }
 
     public read(): Object[] {
       this.assertIsOpenFile();
-      throw new Error("incomplete example code");
+      return [];
     }
 
     public write(data: Object[]): void {
       this.assertIsOpenFile();
-      throw new Error("incomplete example code");
     }
   
     public close(): void {
       this.assertIsOpenFile();
-      throw new Error("incomplete example code");
+      this.opened = false;
     }
 
     public delete(): void {
       this.assertIsClosedFile();
-      throw new Error("incomplete example code");
     }
 
     protected assertIsOpenFile(): void {
-        throw new Error("incomplete example code");
+        if (!this.isOpen()) {
+            throw new Error("File must be open for this operation");
+        }
     }
 
     protected assertIsClosedFile(): void {
-        throw new Error("incomplete example code");
+        if (!this.isClosed()) {
+            throw new Error("File must be closed for this operation");
+        }
     }
 
 }

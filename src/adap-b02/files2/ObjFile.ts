@@ -4,50 +4,60 @@ export class ObjFile implements File {
 
     protected data: Object[] = [];
     protected length: number = 0;
+    private opened: boolean = false;
 
     public isEmpty(): boolean {
       return this.length == 0;
     }
 
     public isOpen(): boolean {
-      throw new Error("incomplete example code");
+      return this.opened;
     }
   
     public isClosed(): boolean {
-        throw new Error("incomplete example code");
+        return !this.opened;
     }
   
     public open(): void {
       this.assertIsClosedFile();
-      throw new Error("incomplete example code");
+      this.opened = true;
     }
 
     public read(): Object[] {
       this.assertIsOpenFile();
-      throw new Error("incomplete example code");
+      const result = [...this.data];
+      this.data = [];
+      this.length = 0;
+      return result;
     }
 
     public write(data: Object[]): void {
       this.assertIsOpenFile();
-      throw new Error("incomplete example code");
+      this.data = [...data];
+      this.length = data.length;
     }
   
     public close(): void {
       this.assertIsOpenFile();
-      throw new Error("incomplete example code");
+      this.opened = false;
     }
 
     public delete(): void {
       this.assertIsClosedFile();
-      throw new Error("incomplete example code");
+      this.data = [];
+      this.length = 0;
     }
 
     protected assertIsOpenFile(): void {
-        throw new Error("incomplete example code");
+        if (!this.isOpen()) {
+            throw new Error("File must be open for this operation");
+        }
     }
 
     protected assertIsClosedFile(): void {
-        throw new Error("incomplete example code");
+        if (!this.isClosed()) {
+            throw new Error("File must be closed for this operation");
+        }
     }
 
 }
